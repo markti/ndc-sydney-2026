@@ -323,3 +323,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+Qonq.Reasoning.Agents.IntegrationTests/local-setup.ps1

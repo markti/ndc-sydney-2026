@@ -6,9 +6,9 @@ Demonstrates AI-powered entity matching using Azure OpenAI and the .NET OpenAI S
 
 | Project | Purpose |
 |---|---|
-| `MatchByNameAgent` | Core library — `EntityMatchingService` and supporting types |
-| `MatchByNameAgent.UnitTests` | Unit tests using NSubstitute (no network required) |
-| `MatchByNameAgent.IntegrationTests` | Integration tests that call a live Azure OpenAI deployment |
+| `Qonq.Reasoning.Agents` | Core library — `EntityMatchingService` and supporting types |
+| `Qonq.Reasoning.Agents.UnitTests` | Unit tests using NSubstitute (no network required) |
+| `Qonq.Reasoning.Agents.IntegrationTests` | Integration tests that call a live Azure OpenAI deployment |
 
 ---
 
@@ -17,7 +17,7 @@ Demonstrates AI-powered entity matching using Azure OpenAI and the .NET OpenAI S
 No configuration needed.
 
 ```powershell
-dotnet test MatchByNameAgent.UnitTests/MatchByNameAgent.UnitTests.csproj
+dotnet test Qonq.Reasoning.Agents.UnitTests/Qonq.Reasoning.Agents.UnitTests.csproj
 ```
 
 ---
@@ -31,10 +31,10 @@ dotnet test MatchByNameAgent.UnitTests/MatchByNameAgent.UnitTests.csproj
 
 ### 1. Configure secrets
 
-Open `MatchByNameAgent.IntegrationTests/setup-secrets.ps1` and set your `AOAI:AccessKey`, then run:
+Open `Qonq.Reasoning.Agents.IntegrationTests/setup-secrets.ps1` and set your `AOAI:AccessKey`, then run:
 
 ```powershell
-.\MatchByNameAgent.IntegrationTests\setup-secrets.ps1
+.\Qonq.Reasoning.Agents.IntegrationTests\setup-secrets.ps1
 ```
 
 This registers the following values in the [.NET user secrets store](https://learn.microsoft.com/aspnet/core/security/app-secrets):
@@ -50,7 +50,7 @@ Secrets are stored on your machine and are never committed to source control.
 ### 2. Run the tests
 
 ```powershell
-dotnet test MatchByNameAgent.IntegrationTests/MatchByNameAgent.IntegrationTests.csproj
+dotnet test Qonq.Reasoning.Agents.IntegrationTests/Qonq.Reasoning.Agents.IntegrationTests.csproj
 ```
 
 ### CI / environment variables

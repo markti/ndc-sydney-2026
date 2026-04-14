@@ -15,7 +15,7 @@ public class EntityMatchingIntegrationTests : IClassFixture<OpenAIFixture>
     {
         _output = output;
 
-        var chatCompletionService = new OpenAIChatCompletionService(fixture.ChatClient);
+        var chatCompletionService = fixture.ChatClient;
 
         _sut = new EntityMatchingService(
             NullLogger<EntityMatchingService>.Instance,

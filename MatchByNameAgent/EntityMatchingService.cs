@@ -4,6 +4,8 @@ using Qonq.Reasoning.Agents.Interfaces;
 using Qonq.Reasoning.Agents.Models;
 using Qonq.Reasoning.Agents.Prompts;
 using Microsoft.Extensions.Logging;
+using OpenAI.Chat;
+using System.Text;
 
 namespace Qonq.Reasoning.Agents;
 
@@ -16,14 +18,14 @@ public class EntityMatchingService : IEntityMatchingService
     };
 
     private readonly ILogger<EntityMatchingService> _logger;
-    private readonly IChatCompletionService _chatCompletionService;
+    private readonly ChatClient _chatClient;
 
     public EntityMatchingService(
         ILogger<EntityMatchingService> logger,
-        IChatCompletionService chatCompletionService)
+        ChatClient chatCompletionService)
     {
         _logger = logger;
-        _chatCompletionService = chatCompletionService;
+        _chatClient = chatCompletionService;
     }
 
     public async Task<MatchResult> MatchAsync(
@@ -74,12 +76,24 @@ public class EntityMatchingService : IEntityMatchingService
         };
         thread.GenerateJsonOutput(sample1, sample2, sample3);
 
-        var completionResult = await _chatCompletionService.CompleteAsync(thread.Messages, stoppingToken);
+        var result = await _chatClient.CompleteChatAsync(thread.Messages);
+        var completionResult = result.Value;
 
-        _logger.LogInformation("TOKENS total={Total}", completionResult.TotalTokenCount);
-        _logger.LogInformation("Entity Matching Service: CHAT RESPONSE: {Response}", completionResult.ResponseText);
+        var tokenUsage = completionResult.Usage;
+        _logger.LogInformation("TOKENS input={Input}, output={Output}, total={Total}", tokenUsage?.InputTokenCount ?? 0, tokenUsage?.OutputTokenCount ?? 0, tokenUsage?.TotalTokenCount ?? 0);
 
-        var responseOutput = JsonSerializer.Deserialize<EntityMatchReasoning>(completionResult.ResponseText, JsonOptions);
+        var responseBuilder = new StringBuilder();
+
+        foreach (var content in completionResult.Content)
+        {
+            responseBuilder.AppendLine(content.Text);
+        }
+
+        _logger.LogInformation($"Entity Matching Service: CHAT RESPONSE: {responseBuilder.ToString()}");
+
+        var responseText = responseBuilder.ToString();
+
+        var responseOutput = JsonSerializer.Deserialize<EntityMatchReasoning>(responseText, JsonOptions);
 
         if (responseOutput == null || responseOutput.MatchType == EntityMatchType.NoMatch)
         {

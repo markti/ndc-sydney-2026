@@ -1,13 +1,13 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatchByNameAgent", "MatchByNameAgent.csproj", "{C4B11950-C581-40E7-9887-8F54D8340BFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qonq.Reasoning.Agents", "Qonq.Reasoning.Agents.csproj", "{C4B11950-C581-40E7-9887-8F54D8340BFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatchByNameAgent.UnitTests", "..\MatchByNameAgent.UnitTests\MatchByNameAgent.UnitTests.csproj", "{A0BB2A02-38EB-4A64-923F-2DD180AD1ABE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qonq.Reasoning.Agents.UnitTests", "..\MatchByNameAgent.UnitTests\Qonq.Reasoning.Agents.UnitTests.csproj", "{A0BB2A02-38EB-4A64-923F-2DD180AD1ABE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatchByNameAgent.IntegrationTests", "..\MatchByNameAgent.IntegrationTests\MatchByNameAgent.IntegrationTests.csproj", "{8266205A-EFCD-4EBC-AC7B-906DADB29869}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qonq.Reasoning.Agents.IntegrationTests", "..\MatchByNameAgent.IntegrationTests\Qonq.Reasoning.Agents.IntegrationTests.csproj", "{8266205A-EFCD-4EBC-AC7B-906DADB29869}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

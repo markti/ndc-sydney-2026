@@ -31,10 +31,10 @@ dotnet test Qonq.Reasoning.Agents.UnitTests/Qonq.Reasoning.Agents.UnitTests.cspr
 
 ### 1. Configure secrets
 
-Open `Qonq.Reasoning.Agents.IntegrationTests/setup-secrets.ps1` and set your `AOAI:AccessKey`, then run:
+Open `Qonq.Reasoning.Agents.IntegrationTests/local-setup.ps1` and set your `AOAI:AccessKey`, then run:
 
 ```powershell
-.\Qonq.Reasoning.Agents.IntegrationTests\setup-secrets.ps1
+.\Qonq.Reasoning.Agents.IntegrationTests\local-setup.ps1
 ```
 
 This registers the following values in the [.NET user secrets store](https://learn.microsoft.com/aspnet/core/security/app-secrets):
@@ -50,7 +50,7 @@ Secrets are stored on your machine and are never committed to source control.
 ### 2. Run the tests
 
 ```powershell
-dotnet test Qonq.Reasoning.Agents.IntegrationTests/Qonq.Reasoning.Agents.IntegrationTests.csproj
+dotnet test Qonq.Reasoning.Agents.IntegrationTests/Qonq.Reasoning.Agents.IntegrationTests.csproj --logger "console;verbosity=detailed"
 ```
 
 ### CI / environment variables

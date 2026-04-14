@@ -55,7 +55,7 @@ public class EntityMatchingServiceTests
             BuildEntityList(),
             CancellationToken.None);
 
-        Assert.Null(result);
+        Assert.Null(result.Entity);
     }
 
     [Fact]
@@ -74,9 +74,9 @@ public class EntityMatchingServiceTests
             BuildEntityList(),
             CancellationToken.None);
 
-        Assert.NotNull(result);
-        Assert.Equal("entity-1", result.UniqueId);
-        Assert.Equal("Acme Corporation", result.Name);
+        Assert.NotNull(result.Entity);
+        Assert.Equal("entity-1", result.Entity.UniqueId);
+        Assert.Equal("Acme Corporation", result.Entity.Name);
     }
 
     [Fact]
@@ -95,9 +95,9 @@ public class EntityMatchingServiceTests
             BuildEntityList(),
             CancellationToken.None);
 
-        Assert.NotNull(result);
-        Assert.Equal("entity-2", result.UniqueId);
-        Assert.Equal("Globex Corporation", result.Name);
+        Assert.NotNull(result.Entity);
+        Assert.Equal("entity-2", result.Entity.UniqueId);
+        Assert.Equal("Globex Corporation", result.Entity.Name);
     }
 
     [Fact]
@@ -116,7 +116,7 @@ public class EntityMatchingServiceTests
             BuildEntityList(),
             CancellationToken.None);
 
-        Assert.Null(result);
+        Assert.Null(result.Entity);
     }
 
     [Fact]
@@ -135,8 +135,8 @@ public class EntityMatchingServiceTests
             BuildEntityList(),
             CancellationToken.None);
 
-        Assert.NotNull(result);
-        Assert.Contains("ACME", result.Aliases!, StringComparer.OrdinalIgnoreCase);
+        Assert.NotNull(result.Entity);
+        Assert.Contains("ACME", result.Entity.Aliases!, StringComparer.OrdinalIgnoreCase);
     }
 
     [Fact]
@@ -155,9 +155,9 @@ public class EntityMatchingServiceTests
             BuildEntityList(),
             CancellationToken.None);
 
-        Assert.NotNull(result);
-        Assert.Contains("Global Exchange", result.Aliases!);
-        Assert.Contains("GX Corp", result.Aliases!);
+        Assert.NotNull(result.Entity);
+        Assert.Contains("Global Exchange", result.Entity.Aliases!);
+        Assert.Contains("GX Corp", result.Entity.Aliases!);
     }
 
     [Fact]
@@ -176,8 +176,8 @@ public class EntityMatchingServiceTests
             BuildEntityList(),
             CancellationToken.None);
 
-        Assert.NotNull(result);
-        var lowerAliases = result.Aliases!.Select(a => a.ToLowerInvariant()).ToList();
+        Assert.NotNull(result.Entity);
+        var lowerAliases = result.Entity.Aliases!.Select(a => a.ToLowerInvariant()).ToList();
         Assert.Single(lowerAliases, a => a == "acme corp");
     }
 }

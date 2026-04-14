@@ -26,7 +26,7 @@ public class EntityMatchingService : IEntityMatchingService
         _chatCompletionService = chatCompletionService;
     }
 
-    public async Task<IMatchableEntity?> MatchAsync(
+    public async Task<MatchResult> MatchAsync(
         MatchCandidate matchCandidate,
         IEnumerable<IMatchableEntity> existingEntities,
         CancellationToken stoppingToken)
@@ -83,16 +83,16 @@ public class EntityMatchingService : IEntityMatchingService
 
         if (responseOutput == null || responseOutput.MatchType == EntityMatchType.NoMatch)
         {
-            return null;
+            return new MatchResult(null, responseOutput ?? new EntityMatchReasoning { MatchType = EntityMatchType.NoMatch });
         }
 
         var match = existingEntities.FirstOrDefault(p => p.UniqueId == responseOutput.MatchingEntityId);
         if (match == null)
         {
-            return null;
+            return new MatchResult(null, responseOutput);
         }
 
-        return MergeAliases(match, matchCandidate);
+        return new MatchResult(MergeAliases(match, matchCandidate), responseOutput);
     }
 
     private static IMatchableEntity MergeAliases(IMatchableEntity match, MatchCandidate candidate)

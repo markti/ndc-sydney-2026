@@ -4,7 +4,7 @@ namespace Qonq.Reasoning.Agents.Interfaces;
 
 public interface IEntityMatchingService
 {
-    Task<IMatchableEntity?> MatchAsync(
+    Task<MatchResult> MatchAsync(
         MatchCandidate matchCandidate,
         IEnumerable<IMatchableEntity> existingEntities,
         CancellationToken stoppingToken);

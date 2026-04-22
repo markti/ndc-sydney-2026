@@ -40,6 +40,8 @@ public class EntityMatchingService : IEntityMatchingService
         thread.AddUserMessage("Here is the incoming entity name and aliases: ");
         thread.AddDataSample(matchCandidate);
         thread.AddUserMessage("Use the property of 'id' to get the matching entity's ID if one exists");
+        // NDC DEMO
+        //thread.AddUserMessage("Sometimes weird people use numbers to replace letters");
 
         var sample1 = new SampleObject()
         {

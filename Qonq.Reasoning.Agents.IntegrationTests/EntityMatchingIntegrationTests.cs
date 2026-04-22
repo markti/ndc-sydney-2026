@@ -68,6 +68,60 @@ public class EntityMatchingIntegrationTests : IClassFixture<OpenAIFixture>
     }
 
     [Fact]
+    public async Task MatchAsync_WithKnownAlias_ReturnsMatchedEntity2()
+    {
+        var candidate = new MatchCandidate { Name = "MSFT" };
+
+        _output.WriteLine($"Candidate: {candidate.Name}");
+
+        var result = await _sut.MatchAsync(candidate, BuildEntityList(), CancellationToken.None);
+
+        WriteReasoning(result);
+
+        if (result.Entity is null)
+        {
+            _output.WriteLine("Result: no match found");
+        }
+        else
+        {
+            _output.WriteLine($"Match found: {result.Entity.Name} (id={result.Entity.UniqueId})");
+            if (result.Entity.Aliases?.Count > 0)
+                _output.WriteLine($"Aliases: {string.Join(", ", result.Entity.Aliases)}");
+        }
+
+        Assert.NotNull(result.Entity);
+        Assert.Equal(MicrosoftId, result.Entity.UniqueId);
+        Assert.Equal("Microsoft Corporation", result.Entity.Name);
+    }
+
+    [Fact]
+    public async Task MatchAsync_WithKnownAlias_ReturnsMatchedEntity3()
+    {
+        var candidate = new MatchCandidate { Name = "M1cr0s0ft" };
+
+        _output.WriteLine($"Candidate: {candidate.Name}");
+
+        var result = await _sut.MatchAsync(candidate, BuildEntityList(), CancellationToken.None);
+
+        WriteReasoning(result);
+
+        if (result.Entity is null)
+        {
+            _output.WriteLine("Result: no match found");
+        }
+        else
+        {
+            _output.WriteLine($"Match found: {result.Entity.Name} (id={result.Entity.UniqueId})");
+            if (result.Entity.Aliases?.Count > 0)
+                _output.WriteLine($"Aliases: {string.Join(", ", result.Entity.Aliases)}");
+        }
+
+        Assert.NotNull(result.Entity);
+        Assert.Equal(MicrosoftId, result.Entity.UniqueId);
+        Assert.Equal("Microsoft Corporation", result.Entity.Name);
+    }
+
+    [Fact]
     public async Task MatchAsync_WithUnknownEntity_ReturnsNull()
     {
         var candidate = new MatchCandidate { Name = "Amazon Web Services" };

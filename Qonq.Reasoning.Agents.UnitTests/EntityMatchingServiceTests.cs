@@ -16,7 +16,6 @@ public class EntityMatchingServiceTests
         Converters = { new JsonStringEnumConverter() }
     };
 
-    private readonly IChatCompletionService _chatCompletionService = Substitute.For<IChatCompletionService>();
     private readonly EntityMatchingService _sut;
 
     public EntityMatchingServiceTests()

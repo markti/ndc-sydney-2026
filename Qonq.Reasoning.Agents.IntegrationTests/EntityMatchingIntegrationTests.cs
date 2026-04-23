@@ -28,7 +28,7 @@ public class EntityMatchingIntegrationTests : IClassFixture<OpenAIFixture>
 
     private static List<IMatchableEntity> BuildEntityList() =>
     [
-        new MatchedEntity { UniqueId = MicrosoftId, Name = "Microsoft Corporation", Aliases = ["Microsoft", "MSFT"] },
+        new MatchedEntity { UniqueId = MicrosoftId, Name = "Microsoft Corporation", Aliases = ["Microsoft"] },
         new MatchedEntity { UniqueId = AppleId,     Name = "Apple Inc",             Aliases = ["Apple"] },
         new MatchedEntity { UniqueId = GoogleId,    Name = "Google LLC",            Aliases = ["Google", "Alphabet"] }
     ];
@@ -94,6 +94,7 @@ public class EntityMatchingIntegrationTests : IClassFixture<OpenAIFixture>
         Assert.Equal("Microsoft Corporation", result.Entity.Name);
     }
 
+    // NDC DEMO
     [Fact]
     public async Task MatchAsync_WithKnownAlias_ReturnsMatchedEntity3()
     {

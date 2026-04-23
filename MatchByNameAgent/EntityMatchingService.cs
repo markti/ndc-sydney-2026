@@ -41,7 +41,8 @@ public class EntityMatchingService : IEntityMatchingService
         thread.AddDataSample(matchCandidate);
         thread.AddUserMessage("Use the property of 'id' to get the matching entity's ID if one exists");
         // NDC DEMO
-        //thread.AddUserMessage("Sometimes weird people use numbers to replace letters");
+        thread.AddUserMessage("Sometimes weird people use numbers to replace letters");
+        thread.AddUserMessage("Sometimes people use stock tickers as synonyms");
 
         var sample1 = new SampleObject()
         {
